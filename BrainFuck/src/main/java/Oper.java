@@ -17,14 +17,6 @@ public class Oper {
     {
         this.type=type;
     }
-    public Oper(Type type,int times)
-    {
-        this.times=times;
-    }
-    public Oper clone()
-    {
-        return new Oper(type,times);
-    }
     public Type getType()
     {
         return this.type;
