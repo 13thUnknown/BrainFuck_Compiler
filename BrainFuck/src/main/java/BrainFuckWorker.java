@@ -14,6 +14,7 @@ public class BrainFuckWorker
         openRead(fileName);//step 1
         lex();//step 2
         optimization();//step 3
+        interpretation();//step 4
 
     }
 
@@ -66,12 +67,12 @@ public class BrainFuckWorker
                     }
                     case '.':
                     {
-                        list.add(new Oper(Oper.Type.IN));
+                        list.add(new Oper(Oper.Type.OUT));
                         break;
                     }
                     case ',':
                     {
-                        list.add(new Oper(Oper.Type.OUT));
+                        list.add(new Oper(Oper.Type.IN));
                         break;
                     }
                     case '[':
@@ -131,4 +132,70 @@ public class BrainFuckWorker
         }
         System.out.println("Optimization successful.");
     }
+
+    public void interpretation()
+    {
+        char[] arr = new char[30000];
+        int i = 15000;
+        int index=0;
+        List<Circle> queue = new ArrayList<Circle>();
+        while (index!=list.size()-1) {
+            switch (list.get(index).getType()) {
+                case FORWARD: {
+                    i += list.get(index++).times;
+                    break;
+                }
+                case BACK: {
+                    i -= list.get(index++).times;
+                    break;
+                }
+                case ADD: {
+                    arr[i] += list.get(index++).times;
+                    break;
+                }
+                case MINUS: {
+                    arr[i] -= list.get(index++).times;
+                    break;
+                }
+                case IN: {
+                    while (list.get(index).times-- > 0) {
+                        try {
+                            arr[i] = (char) System.in.read();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    index++;
+                    break;
+                }
+                case OUT: {
+                    while (list.get(index).times-- > 0) {
+                        System.out.print(arr[i]);
+                    }
+                    index++;
+                    break;
+                }
+                case WHILE: {
+                    queue.add(new Circle(index, list.get(index).times));
+                    index++;
+                    break;
+                }
+                case END: {
+                    if (arr[i]==0)
+                    {
+                        queue.remove(queue.size()-1);
+                        index++;
+                        break;
+                    }
+                    else
+                    {
+                        index=queue.get(queue.size()-1).index+1;
+                        break;
+                    }
+
+                }
+            }
+        }
+    }
+
 }
