@@ -10,6 +10,7 @@ public class Oper {
         WHILE,
         END
     }
+
     private Type type=null;
     public int times=1;
     public Oper(Type type)
