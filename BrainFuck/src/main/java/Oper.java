@@ -1,24 +1,27 @@
 public class Oper {
-    public enum Type
-    {
-        FORWARD,
-        BACK,
-        ADD,
-        MINUS,
-        IN,
-        OUT,
-        WHILE,
-        END
-    }
+    public enum Type {
+        FORWARD (">"),
+        BACK ("<"),
+        ADD ("+"),
+        MINUS ("-"),
+        IN (","),
+        OUT ("."),
+        WHILE("["),
+        END("]");
+        private String title;
+        Type(String title) {
+          this.title=title;
+        }
 
-    private Type type=null;
+    }
+    private Type type;
     public int times=1;
-    public Oper(Type type)
-    {
+
+    public Oper(Type type) {
         this.type=type;
     }
-    public Type getType()
-    {
+
+    public Type getType() {
         return this.type;
     }
 
