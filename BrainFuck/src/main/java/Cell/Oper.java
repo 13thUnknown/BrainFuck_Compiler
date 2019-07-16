@@ -1,15 +1,17 @@
+package Cell;
+
 public class Oper {
     public enum Type {
-        FORWARD (">"),
-        BACK ("<"),
-        ADD ("+"),
-        MINUS ("-"),
-        IN (","),
-        OUT ("."),
-        WHILE("["),
-        END("]");
-        private String title;
-        Type(String title) {
+        FORWARD ('>'),
+        BACK ('<'),
+        ADD ('+'),
+        MINUS ('-'),
+        IN (','),
+        OUT ('.'),
+        WHILE('['),
+        END(']');
+        private char title;
+        Type(char title) {
           this.title=title;
         }
 
